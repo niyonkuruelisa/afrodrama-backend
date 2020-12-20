@@ -212,7 +212,7 @@ class Api::V1::MoviesController < ApplicationController
                    movies: @movies}
 
     elsif params[:type].present?
-      @movies = Movie.joins(:genres).where("genre.title = ?",params[:type]).offset(@offset).limit(@limit)
+      @movies = Movie.joins(:genres).where("genres.title = ?",params[:type]).offset(@offset).limit(@limit)
 
       # adding cover url on fly
       @movies = @movies.each do |m|
