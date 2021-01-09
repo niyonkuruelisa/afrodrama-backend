@@ -10,7 +10,7 @@ class Api::V1::AuthenticationController < ApplicationController
       render json: {
           success: true,
           token: command.result,
-          user: user.role
+          user: user
       }
     else
       render json: {success: false, error: command.errors}, status: :ok

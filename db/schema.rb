@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2020_12_19_070651) do
 
-  create_table "characters", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "characters", id: :string, limit: 36, force: :cascade do |t|
     t.string "names"
     t.string "email"
     t.string "phone", default: ""
@@ -23,15 +26,15 @@ ActiveRecord::Schema.define(version: 2020_12_19_070651) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "genres", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "genres", id: :string, limit: 36, force: :cascade do |t|
     t.string "title"
-    t.text "description", default: "''"
+    t.text "description", default: ""
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "softDelete", default: false
   end
 
-  create_table "movie_covers", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "movie_covers", id: :string, limit: 36, force: :cascade do |t|
     t.string "originalName"
     t.string "coverType"
     t.string "size"
@@ -42,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_12_19_070651) do
     t.index ["movie_id"], name: "index_movie_covers_on_movie_id"
   end
 
-  create_table "movie_files", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "movie_files", id: :string, limit: 36, force: :cascade do |t|
     t.string "originalName"
     t.string "size"
     t.string "resolutions"
@@ -54,7 +57,7 @@ ActiveRecord::Schema.define(version: 2020_12_19_070651) do
     t.index ["movie_id"], name: "index_movie_files_on_movie_id"
   end
 
-  create_table "movie_genres", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "movie_genres", id: :string, limit: 36, force: :cascade do |t|
     t.string "movie_id", null: false
     t.string "genre_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -63,7 +66,7 @@ ActiveRecord::Schema.define(version: 2020_12_19_070651) do
     t.index ["movie_id"], name: "index_movie_genres_on_movie_id"
   end
 
-  create_table "movies", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "movies", id: :string, limit: 36, force: :cascade do |t|
     t.string "imdbCode", default: ""
     t.string "title", default: ""
     t.string "titleEnglish", default: ""
@@ -71,8 +74,8 @@ ActiveRecord::Schema.define(version: 2020_12_19_070651) do
     t.integer "movieType", comment: "1 = Full Movie, 2 = Short Movie, 3 = Tv Show"
     t.integer "year"
     t.string "runtime", default: ""
-    t.text "summary", default: "''"
-    t.text "description", default: "''"
+    t.text "summary", default: ""
+    t.text "description", default: ""
     t.string "ytTrailerCode", default: ""
     t.string "status", default: "inactive"
     t.integer "softDelete", default: 0
@@ -80,7 +83,7 @@ ActiveRecord::Schema.define(version: 2020_12_19_070651) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", id: :string, limit: 36, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "users", id: :string, limit: 36, force: :cascade do |t|
     t.string "firstName"
     t.string "lastName"
     t.string "email"
