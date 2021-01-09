@@ -10,7 +10,7 @@ class Api::V1::AuthenticationController < ApplicationController
       render json: {
           success: true,
           token: command.result,
-          user: user
+          user: user.as_json(:except => (:password_digest))
       }
     else
       render json: {success: false, error: command.errors}, status: :ok
