@@ -1,6 +1,7 @@
 class Api::V1::AuthenticationController < ApplicationController
   # skip authorization checks because it's public resource
   skip_before_action :authenticate_request
+  before_action :authenticate_request,only: [:checkAuth]
   # user login
   def authenticate
 
@@ -17,6 +18,9 @@ class Api::V1::AuthenticationController < ApplicationController
     end
   end
 
+  def checkAuth
+    render json: {success: true,user: @current_user.as_json(:except => (:password_digest))}
+  end
   # user registration
   def registration
 
@@ -39,6 +43,7 @@ class Api::V1::AuthenticationController < ApplicationController
       end
 
     end
+
 
   end
 end

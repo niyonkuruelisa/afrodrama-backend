@@ -11,7 +11,7 @@ class Api::V1::GenresController < ApplicationController
     # @genres = Genre.where('softDelete != ?',1).all
     #for admin
     @genres = Genre.all
-    render json: {success: true,genres: @genres.order(created_at: :desc),totalGenres: @genres.count,activeGenres: @genres.where(' softDelete != ?',1).order(created_at: :desc)}
+    render json: {success: true,genres: @genres.order(created_at: :desc),totalGenres: @genres.count,activeGenres: @genres.where('soft_delete = false').order(created_at: :desc)}
   end
 
   # GET /genres/1
@@ -42,7 +42,7 @@ class Api::V1::GenresController < ApplicationController
 
   # DELETE /genres/1
   def destroy
-    @genre.softDelete = 1
+    @genre.softDelete = true
     if @genre.save
       render json: {success: true,message: "Genre ( #{@genre.title} ) is successfully deleted"}
     else

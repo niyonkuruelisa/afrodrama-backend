@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       # Authentication and Authorization routes
       post 'login',     to: 'authentication#authenticate'
       post 'register',  to: 'authentication#registration'
+      get 'checkAuth',  to: 'authentication#checkAuth'
       get 'user',  to: 'user#show'
 
       # Admin Routes
