@@ -3,9 +3,9 @@ class MovieCover < ApplicationRecord
   before_validation :set_uuid, on: :create
   belongs_to :movie
   mount_uploader :cover, CoverUploader
-  validates :originalName,presence: true
+  validates :original_name,presence: true
   validates :size,presence: true
-  validates :coverType,presence: true
+  validates :cover_type,presence: true
 
   # attribute accessors for temp use
   attr_accessor :url
