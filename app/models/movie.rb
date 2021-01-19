@@ -2,8 +2,8 @@ class Movie < ApplicationRecord
 
   before_validation :set_uuid, on: :create
   validates :title,presence: true
-  validates :titleEnglish,presence: true
-  validates :movieType,presence: true
+  validates :title_english,presence: true
+  validates :movie_type,presence: true
   validates :year,presence: true
   validates :summary,presence: true
   validates :description,presence: true
