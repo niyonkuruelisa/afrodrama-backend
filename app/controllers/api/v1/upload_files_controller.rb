@@ -16,7 +16,7 @@ class Api::V1::UploadFilesController < ApplicationController
     end
 
     # save the cover and upload it's file
-    @movieCover = MovieCover.new(originalName: params[:name],size: params[:size],coverType: params[:type],cover: params[:cover],movie_id: params[:movie_id])
+    @movieCover = MovieCover.new(original_name: params[:name],size: params[:size],cover_type: params[:type],cover: params[:cover],movie_id: params[:movie_id])
     if @movieCover.save
 
       render json: {success: true, cover: @movieCover},status: :created
@@ -32,7 +32,7 @@ class Api::V1::UploadFilesController < ApplicationController
   # POST /api/v1/uploadMovieFile
   def uploadMovieFile
 
-    @movieFile = MovieFile.new(originalName: params[:name],size: params[:size],resolutions: params[:resolutions],movie: params[:movie],movie_id: params[:movie_id])
+    @movieFile = MovieFile.new(original_name: params[:name],size: params[:size],resolutions: params[:resolutions],movie: params[:movie],movie_id: params[:movie_id])
 
     if @movieFile.save
       render json: {success: true, movieFile: @movieFile.movie},status: :created

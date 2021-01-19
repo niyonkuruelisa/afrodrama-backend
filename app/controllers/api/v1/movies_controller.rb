@@ -29,7 +29,7 @@ class Api::V1::MoviesController < ApplicationController
           :include =>
               [
                   :genres => {:only =>[:id, :title]},
-                  :movie_covers => {:only =>[:id, :coverType, :url],:methods => :url}
+                  :movie_covers => {:only =>[:id, :cover_type, :url],:methods => :url}
               ]
       )
 
@@ -57,7 +57,7 @@ class Api::V1::MoviesController < ApplicationController
           :include =>
               [
                   :genres => {:only =>[:id, :title]},
-                  :movie_covers => {:only =>[:id, :coverType, :url],:methods => :url}
+                  :movie_covers => {:only =>[:id, :cover_type, :url],:methods => :url}
               ]
       )
 
@@ -68,7 +68,7 @@ class Api::V1::MoviesController < ApplicationController
 
 
     elsif params[:type] == "fullMovies"
-    @movies = Movie.where("movieType = ? AND status = ?", 1,:active).limit(6)
+    @movies = Movie.where("movie_type = ? AND status = ?", 1,:active).limit(6)
 
       # adding cover url on fly
       @movies = @movies.each do |m|
@@ -85,7 +85,7 @@ class Api::V1::MoviesController < ApplicationController
           :include =>
               [
                   :genres => {:only =>[:id, :title]},
-                  :movie_covers => {:only =>[:id, :coverType, :url],:methods => :url}
+                  :movie_covers => {:only =>[:id, :cover_type, :url],:methods => :url}
               ]
       )
 
@@ -96,7 +96,7 @@ class Api::V1::MoviesController < ApplicationController
 
 
     elsif params[:type] == "shortMovies"
-      @movies = Movie.where("movieType = ? AND status = ?", 2,:active).limit(4)
+      @movies = Movie.where("movie_type = ? AND status = ?", 2,:active).limit(4)
 
       # adding cover url on fly
       @movies = @movies.each do |m|
@@ -113,7 +113,7 @@ class Api::V1::MoviesController < ApplicationController
           :include =>
               [
                   :genres => {:only =>[:id, :title]},
-                  :movie_covers => {:only =>[:id, :coverType, :url],:methods => :url}
+                  :movie_covers => {:only =>[:id, :cover_type, :url],:methods => :url}
               ]
       )
 
@@ -128,7 +128,7 @@ class Api::V1::MoviesController < ApplicationController
 
     elsif params[:type] == "AllFullMovies"
 
-      @movies = Movie.where("movieType = ? AND status = ?", 1,:active).offset(@offset).limit(@limit)
+      @movies = Movie.where("movie_type = ? AND status = ?", 1,:active).offset(@offset).limit(@limit)
 
       # adding cover url on fly
       @movies = @movies.each do |m|
@@ -145,7 +145,7 @@ class Api::V1::MoviesController < ApplicationController
           :include =>
               [
                   :genres => {:only =>[:id, :title]},
-                  :movie_covers => {:only =>[:id, :coverType, :url],:methods => :url}
+                  :movie_covers => {:only =>[:id, :cover_type, :url],:methods => :url}
               ]
       )
 
@@ -175,7 +175,7 @@ class Api::V1::MoviesController < ApplicationController
           :include =>
               [
                   :genres => {:only =>[:id, :title]},
-                  :movie_covers => {:only =>[:id, :coverType, :url],:methods => :url}
+                  :movie_covers => {:only =>[:id, :cover_type, :url],:methods => :url}
               ]
       )
 
@@ -187,7 +187,7 @@ class Api::V1::MoviesController < ApplicationController
 
     elsif params[:type] == "AllShortMovies"
 
-      @movies = Movie.where("movieType = ? AND status = ?", 2,:active).offset(@offset).limit(@limit)
+      @movies = Movie.where("movie_type = ? AND status = ?", 2,:active).offset(@offset).limit(@limit)
 
       # adding cover url on fly
       @movies = @movies.each do |m|
@@ -204,7 +204,7 @@ class Api::V1::MoviesController < ApplicationController
           :include =>
               [
                   :genres => {:only =>[:id, :title]},
-                  :movie_covers => {:only =>[:id, :coverType, :url],:methods => :url}
+                  :movie_covers => {:only =>[:id, :cover_type, :url],:methods => :url}
               ]
       )
 
@@ -229,7 +229,7 @@ class Api::V1::MoviesController < ApplicationController
           :include =>
               [
                   :genres => {:only =>[:id, :title]},
-                  :movie_covers => {:only =>[:id, :coverType, :url],:methods => :url}
+                  :movie_covers => {:only =>[:id, :cover_type, :url],:methods => :url}
               ]
       )
 
@@ -254,7 +254,7 @@ class Api::V1::MoviesController < ApplicationController
           :include =>
               [
                   :genres => {:only =>[:id, :title]},
-                  :movie_covers => {:only =>[:id, :coverType, :url],:methods => :url}
+                  :movie_covers => {:only =>[:id, :cover_type, :url],:methods => :url}
               ]
       )
 
@@ -286,7 +286,7 @@ class Api::V1::MoviesController < ApplicationController
         :include =>
             [
                 :genres => {:only =>[:id, :title]},
-                :movie_covers => {:only =>[:id, :coverType, :url],:methods => :url},
+                :movie_covers => {:only =>[:id, :cover_type, :url],:methods => :url},
                 :movie_files => {:only =>[:id, :size, :resolutions, :streamURL],:methods => :streamURL}
             ]
     )
@@ -377,7 +377,7 @@ class Api::V1::MoviesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def movie_params
-      params.require(:movie).permit(:imdbCode, :title, :titleEnglish, :titleLong, :movieType, :year, :runtime, :summary, :description, :ytTrailerCode, :status, :softDelete,:type, movieGenres: [:genre_id, :movie_id])
+      params.require(:movie).permit(:imd_code, :title, :title_english, :title_long, :movie_type, :year, :runtime, :summary, :description, :yt_trailer_code, :status, :soft_delete,:type, movieGenres: [:genre_id, :movie_id])
     end
 
 end
