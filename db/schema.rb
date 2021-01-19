@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_19_144620) do
+ActiveRecord::Schema.define(version: 2021_01_19_161838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(version: 2021_01_19_144620) do
   end
 
   create_table "movie_covers", id: :string, limit: 36, force: :cascade do |t|
-    t.string "originalName"
-    t.string "coverType"
+    t.string "original_name"
+    t.string "cover_type"
     t.string "size"
     t.string "movie_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -47,13 +47,13 @@ ActiveRecord::Schema.define(version: 2021_01_19_144620) do
   end
 
   create_table "movie_files", id: :string, limit: 36, force: :cascade do |t|
-    t.string "originalName"
+    t.string "original_name"
     t.string "size"
     t.string "resolutions"
     t.string "movie_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "fileType", default: ""
+    t.string "file_type", default: ""
     t.string "movie", default: ""
     t.index ["movie_id"], name: "index_movie_files_on_movie_id"
   end
@@ -68,28 +68,28 @@ ActiveRecord::Schema.define(version: 2021_01_19_144620) do
   end
 
   create_table "movies", id: :string, limit: 36, force: :cascade do |t|
-    t.string "imdbCode", default: ""
+    t.string "imd_code", default: ""
     t.string "title", default: ""
-    t.string "titleEnglish", default: ""
-    t.string "titleLong", default: ""
-    t.integer "movieType", comment: "1 = Full Movie, 2 = Short Movie, 3 = Tv Show"
+    t.string "title_english", default: ""
+    t.string "title_long", default: ""
+    t.integer "movie_type", comment: "1 = Full Movie, 2 = Short Movie, 3 = Tv Show"
     t.integer "year"
     t.string "runtime", default: ""
     t.text "summary", default: ""
     t.text "description", default: ""
-    t.string "ytTrailerCode", default: ""
+    t.string "yt_trailer_code", default: ""
     t.string "status", default: "inactive"
-    t.integer "softDelete", default: 0
+    t.integer "soft_delete", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", id: :string, limit: 36, force: :cascade do |t|
-    t.string "firstName"
-    t.string "lastName"
+    t.string "first_name"
+    t.string "last_name"
     t.string "email"
     t.string "password_digest"
-    t.string "phoneNumber", default: ""
+    t.string "phone_number", default: ""
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "role", default: "user"

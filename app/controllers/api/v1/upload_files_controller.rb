@@ -7,7 +7,7 @@ class Api::V1::UploadFilesController < ApplicationController
   # POST /api/v1/uploadMovieCover
   def uploadMovieCover
     # check if there is any cover with the same type  and delete it we cant have more than one cover with the same type
-    @covers = MovieCover.where('movie_id =? && coverType =?',params[:movie_id],params[:type])
+    @covers = MovieCover.where('movie_id =? AND movie_covers.cover_type =?',params[:movie_id],params[:type])
     if @covers.count > 0
       @covers.each do |myCover|
         myCover.remove_cover
