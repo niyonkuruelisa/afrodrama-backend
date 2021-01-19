@@ -4,6 +4,6 @@
 # Examples:
 #
 # movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-User.create!(firstName: 'Niyonkuru',lastName: 'Elisa',email: 'niyonkuruelisa@gmail.com',phoneNumber:'+250785290539',role: 'admin',password: '12345678')
-User.create!(firstName: 'Mugenimana',lastName: 'fifi',email: 'fifi@gmail.com',phoneNumber:'+250785290539',password: '12345678')
-User.create!(firstName: 'Test',lastName: 'Client',email: 'test@gmail.com',phoneNumber:'+250785290539',role: 'tester',password: '12345678')
+User.create!(first_name: 'Niyonkuru',last_name: 'Elisa',email: 'niyonkuruelisa@gmail.com',phone_number:'+250785290539',role: 'admin',password: '12345678')
+User.create!(first_name: 'Mugenimana',last_name: 'fifi',email: 'fifi@gmail.com',phone_number:'+250785290539',password: '12345678')
+User.create!(first_name: 'Test',last_name: 'Client',email: 'test@gmail.com',phone_number:'+250785290539',role: 'tester',password: '12345678')
