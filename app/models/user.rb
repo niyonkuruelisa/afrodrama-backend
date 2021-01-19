@@ -2,10 +2,10 @@ class User < ApplicationRecord
   has_secure_password
   before_validation :set_uuid, on: :create
 
-  validates :firstName,
+  validates :first_name,
             length: { minimum: 2 }
 
-  validates :lastName,
+  validates :last_name,
             length: { minimum: 2 }
 
   VALIDATE_EMAIL_REGEX = /@/
