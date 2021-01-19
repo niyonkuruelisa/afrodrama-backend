@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
       # movie genres route
       resources :genres
+      post 'genre/activate', to: 'genres#activate'
       # movie characters route
       resources :characters
       # movies info route

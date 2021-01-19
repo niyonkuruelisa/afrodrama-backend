@@ -11,7 +11,7 @@ class Api::V1::GenresController < ApplicationController
     # @genres = Genre.where('softDelete != ?',1).all
     #for admin
     @genres = Genre.all
-    render json: {success: true,genres: @genres.order(created_at: :desc),totalGenres: @genres.count,activeGenres: @genres.where('soft_delete = false').order(created_at: :desc)}
+    render json: {success: true,genres: @genres.order(created_at: :desc),totalGenres: @genres.count,activeGenres: @genres.where('status = true').order(created_at: :desc)}
   end
 
   # GET /genres/1
@@ -21,7 +21,7 @@ class Api::V1::GenresController < ApplicationController
 
   # POST /genres
   def create
-    @genre = Genre.new(genre_params)
+    @genre = Genre.new(genre_params.except(:softDelete))
 
     if @genre.save
       render json: {success: true,genre: @genre}, status: :created
@@ -30,16 +30,23 @@ class Api::V1::GenresController < ApplicationController
     end
 
   end
-
   # PATCH/PUT /genres/1
   def update
-    if @genre.update(genre_params)
+    if @genre.update(genre_params.except(:softDelete))
       render json: {success: true,genre: @genre}
     else
       render json: @genre.errors, status: :unprocessable_entity
     end
   end
-
+  # POST /genre/activate
+  def activate
+    @genre = Genre.find(genre_params[:id])
+    if @genre.update(genre_params)
+      render json: {success: true,message: "Genre ( #{@genre.title} ) is successfully deleted"}
+    else
+      render json: @genre.errors, status: :unprocessable_entity
+    end
+  end
   # DELETE /genres/1
   def destroy
     @genre.softDelete = true
@@ -58,6 +65,6 @@ class Api::V1::GenresController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def genre_params
-      params.require(:genre).permit(:title,:description,:id)
+      params.require(:genre).permit(:title,:description,:id,:status)
     end
 end
