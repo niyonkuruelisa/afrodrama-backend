@@ -24,8 +24,8 @@ class Api::V1::AuthenticationController < ApplicationController
   # user registration
   def registration
 
-    @user  = User.new(firstName: params['firstName'],
-                     lastName: params['lastName'],
+    @user  = User.new(first_name: params['firstName'],
+                      last_name: params['lastName'],
                      email: params['email'],
                      password: params['password'],
                      password_confirmation: params['passwordConfirmation'])
