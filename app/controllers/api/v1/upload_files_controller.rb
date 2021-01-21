@@ -31,13 +31,35 @@ class Api::V1::UploadFilesController < ApplicationController
 
   # POST /api/v1/uploadMovieFile
   def uploadMovieFile
+    # check if there are any movie with the same resolution and delete it
+    @MyMovieFile = MovieFile.where("movie_id = ? AND resolutions = ?",params[:movie_id],params[:resolutions])
 
-    @movieFile = MovieFile.new(original_name: params[:name],size: params[:size],resolutions: params[:resolutions],movie: params[:movie],movie_id: params[:movie_id])
+    if @MyMovieFile.blank?
+      # upload new movie file
+      @movieFile = MovieFile.new(original_name: params[:name], size: params[:size], resolutions: params[:resolutions], movie: params[:movie], movie_id: params[:movie_id])
 
-    if @movieFile.save
-      render json: {success: true, movieFile: @movieFile.movie},status: :created
+      if @movieFile.save
+        render json: {success: true, movieFile: @movieFile.movie}, status: :created
+      else
+        render json: {success: false, error: @movieFile.errors}, status: :created
+      end
     else
-      render json: {success: false, error: @movieFile.errors},status: :created
+      # check if file exist or not.
+      @movieURL = ""
+      @MyMovieFile.each do |movie|
+        movie.remove_movie!
+        movie.save!
+      end
+      @MyMovieFile.delete_all
+      # upload new movie file
+      @movieFile = MovieFile.new(original_name: params[:name], size: params[:size], resolutions: params[:resolutions], movie: params[:movie], movie_id: params[:movie_id])
+
+      if @movieFile.save
+        render json: {success: true, movieFile: @movieFile.movie}, status: :created
+      else
+        render json: {success: false, error: @movieFile.errors}, status: :created
+      end
+
     end
 
   end
