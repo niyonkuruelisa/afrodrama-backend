@@ -37,6 +37,7 @@ class Api::V1::MoviesController < ApplicationController
                    movies: @movies}
 
 
+
     elsif params[:type] == "searchMovie"
       @keywords = params['query']
       if  @keywords === ""
@@ -70,8 +71,36 @@ class Api::V1::MoviesController < ApplicationController
       end
 
 
+    elsif params[:type] == "nextMovies"
+      @movie_id = params[:movie_id]
+      @movies = Movie.where("status = ? AND movies.id != ?",:active,@movie_id).limit(8).order(created_at: :desc)
+
+      # adding cover url on fly
+      @movies = @movies.each do |m|
+        m.movie_covers.each do |c|
+          begin
+            c.url = request.base_url + c.cover.url
+          rescue
+            c.url = ""
+          end
+        end
+      end
+
+      @movies = @movies.as_json(
+          :include =>
+              [
+                  :genres => {:only =>[:id, :title]},
+                  :movie_covers => {:only =>[:id, :cover_type, :url],:methods => :url}
+              ]
+      )
+
+      render json:{success:true,
+                   movies: @movies}
+
+
+
     elsif params[:type] == "latestMovies"
-    @movies = Movie.where("status = ?",:active).limit(4)
+    @movies = Movie.where("status = ?",:active).limit(4).order(created_at: :desc)
 
       # adding cover url on fly
       @movies = @movies.each do |m|
