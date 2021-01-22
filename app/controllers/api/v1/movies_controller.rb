@@ -37,6 +37,37 @@ class Api::V1::MoviesController < ApplicationController
                    movies: @movies}
 
 
+    elsif params[:type] == "searchMovie"
+      @keywords = params['query']
+      if  @keywords === ""
+        render json:{success:true,
+                     movies: []}
+      else
+        @movies = Movie.where("(status = ?) AND ((lower(title) LIKE ?) OR (lower(title_long) LIKE ?) OR (lower(title_english) LIKE ?) OR (lower(summary) LIKE ?) OR (lower(description) LIKE ?))",:active,"%"+@keywords.downcase+"%","%"+@keywords.downcase+"%","%"+@keywords.downcase+"%","%"+@keywords.downcase+"%","%"+@keywords.downcase+"%").offset(@offset).limit(@limit).order(created_at: :desc)
+
+        # adding cover url on fly
+        @movies = @movies.each do |m|
+          m.movie_covers.each do |c|
+            begin
+              c.url = request.base_url + c.cover.url
+            rescue
+              c.url = ""
+            end
+          end
+        end
+
+        @movies = @movies.as_json(
+            :include =>
+                [
+                    :genres => {:only =>[:id, :title]},
+                    :movie_covers => {:only =>[:id, :cover_type, :url],:methods => :url}
+                ]
+        )
+
+        render json:{success:true,
+                     movies: @movies}
+
+      end
 
 
     elsif params[:type] == "latestMovies"
