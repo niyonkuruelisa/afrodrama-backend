@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_19_161838) do
+ActiveRecord::Schema.define(version: 2021_01_23_070946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,6 +80,20 @@ ActiveRecord::Schema.define(version: 2021_01_19_161838) do
     t.string "yt_trailer_code", default: ""
     t.string "status", default: "inactive"
     t.integer "soft_delete", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "systems", id: :string, limit: 36, force: :cascade do |t|
+    t.string "title"
+    t.string "company_name"
+    t.text "about"
+    t.string "slogan"
+    t.string "email"
+    t.string "phone1"
+    t.string "phone2"
+    t.text "keywords"
+    t.text "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
