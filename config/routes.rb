@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+
   # Api definition
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
@@ -28,6 +29,8 @@ Rails.application.routes.draw do
       post 'movie/activate', to: 'movies#activate'
       post 'uploadMovieCover', to: 'upload_files#uploadMovieCover'
       post 'uploadMovieFile', to: 'upload_files#uploadMovieFile'
+      # system payments
+      resources :packages
     end
   end
 end

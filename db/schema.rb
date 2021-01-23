@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_23_070946) do
+ActiveRecord::Schema.define(version: 2021_01_23_105512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,16 @@ ActiveRecord::Schema.define(version: 2021_01_23_070946) do
     t.integer "soft_delete", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "packages", id: :string, limit: 36, force: :cascade do |t|
+    t.string "package_type"
+    t.integer "amount"
+    t.string "status", default: "active"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "discount", default: 0
+    t.string "name"
   end
 
   create_table "systems", id: :string, limit: 36, force: :cascade do |t|
