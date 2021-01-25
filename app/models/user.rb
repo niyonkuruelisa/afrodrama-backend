@@ -1,5 +1,8 @@
 class User < ApplicationRecord
+
+  has_one :subscription
   has_secure_password
+
   before_validation :set_uuid, on: :create
 
   validates :first_name,
@@ -21,7 +24,6 @@ class User < ApplicationRecord
   validates :password_digest,
             length: { minimum: 4 },
             format: { with: PASSWORD_FORMAT }
-
 
   def set_uuid
     self.id = SecureRandom.uuid

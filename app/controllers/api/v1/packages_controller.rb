@@ -1,8 +1,8 @@
 class Api::V1::PackagesController < ApplicationController
-  # allow only authorized users to access genres
+  # allow only authorized users to access Packages
   before_action :authenticate_request, only: [:update,:destroy,:create]
   before_action :set_package, only: [:show, :update, :destroy]
-  # allow only admin to edit delete update the genre
+  # allow only admin to edit delete update the Packages
   before_action :check_administration ,only: [:update,:destroy,:create]
   # GET /packages
   def index
