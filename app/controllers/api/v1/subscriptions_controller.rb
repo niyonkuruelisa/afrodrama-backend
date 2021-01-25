@@ -11,6 +11,17 @@ class Api::V1::SubscriptionsController < ApplicationController
     render json: @subscriptions
   end
 
+  # GET user subscription
+  def subscription
+    # get user subscription
+    @subscription = Subscription.where("user_id = ? AND status  = ?",@current_user.id,:active)
+    if @subscription.present?
+      render json: {success: true, subscription: @subscription}
+    else
+      render json: {success: false, message: "No Subscription Found"}
+    end
+
+  end
   # GET /subscriptions/1
   def show
     render json: @subscription
@@ -51,7 +62,6 @@ class Api::V1::SubscriptionsController < ApplicationController
   def destroy
     @subscription.destroy
   end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subscription

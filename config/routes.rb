@@ -30,6 +30,7 @@ Rails.application.routes.draw do
       post 'movie/activate', to: 'movies#activate'
       post 'uploadMovieCover', to: 'upload_files#uploadMovieCover'
       post 'uploadMovieFile', to: 'upload_files#uploadMovieFile'
+      get 'subscription/subscription', to: 'subscriptions#subscription'
       # system payments
       resources :packages
       resources :subscriptions
