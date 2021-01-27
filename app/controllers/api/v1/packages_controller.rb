@@ -8,7 +8,7 @@ class Api::V1::PackagesController < ApplicationController
   def index
     @packages = Package.all
 
-    render json: @packages
+    render json: {success: true,packages: @packages}
   end
   # GET /packages/1
   def show
