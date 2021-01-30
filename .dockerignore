@@ -1,0 +1,7 @@
+.git
+.gitignore
+vendor/
+config/master.key
+/log/*
+/tmp/*
+Dockerfile
