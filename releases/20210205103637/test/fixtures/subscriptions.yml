@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  package: one
+  user: one
+  period_from: 2021-01-25 11:18:51
+  period_to: 2021-01-25 11:18:51
+  status: MyString
+
+two:
+  package: two
+  user: two
+  period_from: 2021-01-25 11:18:51
+  period_to: 2021-01-25 11:18:51
+  status: MyString

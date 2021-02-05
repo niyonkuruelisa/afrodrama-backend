@@ -1,0 +1,15 @@
+current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+/root/.rbenv/versions/2.7.2/bin/ruby -I /root/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210205-926-s5je60.rb extconf.rb
+creating Makefile
+
+current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/websocket-driver-0.7.3/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20210205-926-lxedhs

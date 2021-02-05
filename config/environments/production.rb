@@ -3,7 +3,7 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
-
+  config.secret_key_base = ENV["SECRET_KEY_BASE"]
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
@@ -12,7 +12,7 @@ Rails.application.configure do
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
-
+  
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
   # config.require_master_key = true
@@ -37,7 +37,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
