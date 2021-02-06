@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       # We are going to list our resources here
       # all info about system
       resources :systems
+
       # Authentication and Authorization routes
       post 'login',     to: 'authentication#authenticate'
       post 'register',  to: 'authentication#registration'
