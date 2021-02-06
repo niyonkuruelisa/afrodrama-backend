@@ -6,10 +6,10 @@ set :repo_url, "git@github.com:niyonkuruelisa/afrodrama-backend.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-set :branch, "main"
+set :branch, "backup"
 set :env, fetch(:env, "production")
 # Default deploy_to directory is /var/www/afrodrama.com/web/api
-set :deploy_to, "/var/www/afrodrama.com/web/backend"
+set :deploy_to, "/var/www/afrodrama.com/web/api"
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 # Only keep the last 5 releases to save disk space
 set :keep_releases, 3
