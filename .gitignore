@@ -31,3 +31,12 @@
 /config/master.key
 # Ignore env file
 .env
+/current/*
+/currrent/*
+/releases/*
+/repo/*
+/shared/*
+.rbenv-vars
+Capfile
+current
+revisions.log
