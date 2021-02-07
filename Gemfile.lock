@@ -88,6 +88,10 @@ GEM
       mimemagic (>= 0.3.0)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     ed25519 (1.2.4)
     erubi (1.10.0)
     globalid (0.4.2)
@@ -197,6 +201,7 @@ DEPENDENCIES
   capistrano-rails (~> 1.4)
   capistrano-rbenv (~> 2.1, >= 2.1.4)
   carrierwave (~> 0.11.2)
+  dotenv-rails
   ed25519 (>= 1.2, < 2.0)
   jwt (~> 1.5, >= 1.5.4)
   mime-types (~> 3.1)

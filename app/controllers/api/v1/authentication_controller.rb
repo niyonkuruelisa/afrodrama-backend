@@ -40,6 +40,7 @@ class Api::V1::AuthenticationController < ApplicationController
             success: true,
             message: "Account was successfully created!"
         },status: :created
+        UserAccountCreatedMailer.with(user: @user,system: System.first).welcome_email.deliver_now
       end
 
     end
