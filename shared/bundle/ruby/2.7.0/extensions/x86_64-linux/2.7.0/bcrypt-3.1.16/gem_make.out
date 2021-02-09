@@ -1,5 +1,5 @@
 current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/bcrypt-3.1.16/ext/mri
-/home/deploy/.rbenv/versions/2.7.2/bin/ruby -I /home/deploy/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210206-5492-18cjwnp.rb extconf.rb
+/home/deploy/.rbenv/versions/2.7.2/bin/ruby -I /home/deploy/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210209-2899-1exxwv8.rb extconf.rb
 creating Makefile
 
 current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/bcrypt-3.1.16/ext/mri
@@ -23,4 +23,4 @@ linking shared-object bcrypt_ext.so
 
 current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/bcrypt-3.1.16/ext/mri
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20210206-5492-ca9993
+/usr/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20210209-2899-wdcges

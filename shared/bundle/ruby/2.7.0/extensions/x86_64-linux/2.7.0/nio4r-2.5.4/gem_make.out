@@ -1,5 +1,5 @@
 current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/nio4r-2.5.4/ext/nio4r
-/home/deploy/.rbenv/versions/2.7.2/bin/ruby -I /home/deploy/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210206-5492-13b2mty.rb extconf.rb
+/home/deploy/.rbenv/versions/2.7.2/bin/ruby -I /home/deploy/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210209-2899-47tfk0.rb extconf.rb
 checking for unistd.h... yes
 checking for linux/aio_abi.h... yes
 checking for sys/select.h... yes
@@ -98,4 +98,4 @@ linking shared-object nio4r_ext.so
 
 current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/nio4r-2.5.4/ext/nio4r
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 nio4r_ext.so ./.gem.20210206-5492-1t2xuv6
+/usr/bin/install -c -m 0755 nio4r_ext.so ./.gem.20210209-2899-14tqs6m

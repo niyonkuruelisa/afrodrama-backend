@@ -1,5 +1,5 @@
 current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/pg-1.2.3/ext
-/home/deploy/.rbenv/versions/2.7.2/bin/ruby -I /home/deploy/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210206-5492-729yh0.rb extconf.rb
+/home/deploy/.rbenv/versions/2.7.2/bin/ruby -I /home/deploy/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210209-2899-1di2goi.rb extconf.rb
 checking for pg_config... yes
 Using config values from /usr/bin/pg_config
 checking for libpq-fe.h... yes
@@ -50,4 +50,4 @@ linking shared-object pg_ext.so
 
 current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/pg-1.2.3/ext
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 pg_ext.so ./.gem.20210206-5492-mn8lyu
+/usr/bin/install -c -m 0755 pg_ext.so ./.gem.20210209-2899-ck6sc3

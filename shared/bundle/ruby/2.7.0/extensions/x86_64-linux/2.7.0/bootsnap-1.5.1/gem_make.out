@@ -1,5 +1,5 @@
 current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/bootsnap-1.5.1/ext/bootsnap
-/home/deploy/.rbenv/versions/2.7.2/bin/ruby -I /home/deploy/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210206-5492-jvmplp.rb extconf.rb
+/home/deploy/.rbenv/versions/2.7.2/bin/ruby -I /home/deploy/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210209-2899-1dwwc54.rb extconf.rb
 creating Makefile
 
 current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/bootsnap-1.5.1/ext/bootsnap
@@ -22,4 +22,4 @@ linking shared-object bootsnap/bootsnap.so
 
 current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/bootsnap-1.5.1/ext/bootsnap
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20210206-5492-5v8ljr/bootsnap
+/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20210209-2899-m9ttmc/bootsnap

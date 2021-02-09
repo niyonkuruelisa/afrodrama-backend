@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  # encoding: unicode
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV["POSTGRES_HOST"] %>
+  username: <%= ENV["POSTGRES_USR"] %>
+  password: <%= ENV["POSTGRES_PWD"] %>
+  port: 5432
+
+development:
+  <<: *default
+  database: afrodrama_development
+
+test:
+  <<: *default
+  database: afrodrama_test
+
+production:
+  <<: *default
+  database: afrodrama_production
+  host: <%= ENV["POSTGRES_HOST"] %>
+  username: <%= ENV["POSTGRES_USR"] %>
+  password: <%= ENV['POSTGRES_PWD'] %>

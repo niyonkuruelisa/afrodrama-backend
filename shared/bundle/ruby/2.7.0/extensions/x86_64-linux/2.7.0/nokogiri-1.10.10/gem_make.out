@@ -1,5 +1,5 @@
 current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/nokogiri-1.10.10/ext/nokogiri
-/home/deploy/.rbenv/versions/2.7.2/bin/ruby -I /home/deploy/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210206-5492-8wqtj6.rb extconf.rb
+/home/deploy/.rbenv/versions/2.7.2/bin/ruby -I /home/deploy/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210209-2899-l04ggi.rb extconf.rb
 checking if the C compiler accepts ... yes
 Building nokogiri using packaged libraries.
 Using mini_portile version 2.4.0
@@ -538,4 +538,4 @@ rm -rf /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/nokogiri-1.1
 
 current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/nokogiri-1.10.10/ext/nokogiri
 make "DESTDIR=" install
-/usr/bin/install -c -m 0755 nokogiri.so ./.gem.20210206-5492-2e06vv/nokogiri
+/usr/bin/install -c -m 0755 nokogiri.so ./.gem.20210209-2899-150p8uk/nokogiri

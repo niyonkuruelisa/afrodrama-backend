@@ -1,0 +1,19 @@
+current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/bcrypt_pbkdf-1.1.0/ext/mri
+/home/deploy/.rbenv/versions/2.7.2/bin/ruby -I /home/deploy/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210209-2899-jnnk38.rb extconf.rb
+creating Makefile
+
+current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/bcrypt_pbkdf-1.1.0/ext/mri
+make "DESTDIR=" clean
+
+current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/bcrypt_pbkdf-1.1.0/ext/mri
+make "DESTDIR="
+compiling bcrypt_pbkdf.c
+compiling bcrypt_pbkdf_ext.c
+compiling blowfish.c
+compiling explicit_bzero.c
+compiling hash_sha512.c
+linking shared-object bcrypt_pbkdf_ext.so
+
+current directory: /var/www/afrodrama.com/web/api/shared/bundle/ruby/2.7.0/gems/bcrypt_pbkdf-1.1.0/ext/mri
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bcrypt_pbkdf_ext.so ./.gem.20210209-2899-jnddri
