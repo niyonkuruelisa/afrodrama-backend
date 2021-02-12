@@ -7,3 +7,4 @@
 User.create!(first_name: 'Niyonkuru',last_name: 'Elisa',email: 'niyonkuruelisa@gmail.com',phone_number:'+250785290539',role: 'admin',password: 'Test@afrodrama.com')
 User.create!(first_name: 'Mugenimana',last_name: 'fifi',email: 'fifi@gmail.com',phone_number:'+250785290539',password: 'Test@frodrama.com')
 User.create!(first_name: 'Test',last_name: 'Client',email: 'test@gmail.com',phone_number:'+250785290539',role: 'tester',password: 'Test@afrodrama.com')
+System.create!(title: 'Afrodrama', company_name: 'Afrodrama LTD', about: 'Movies & Documentaries Streaming Platform', slogan: 'Design solution for any media', email: 'afrodrama@gmail.com', phone1: '+250785290539', phone2: '', keywords: 'Movie,ShortM Movies,Stream,ZacuTv', address: 'Kigali RW')
