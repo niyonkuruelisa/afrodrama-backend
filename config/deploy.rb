@@ -3,7 +3,7 @@ lock "~> 3.15.0"
 
 set :application, "api"
 set :repo_url, "git@github.com:niyonkuruelisa/afrodrama-backend.git"
-
+set :pty, true
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 set :branch, "main"
