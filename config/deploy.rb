@@ -8,6 +8,7 @@ set :pty, true
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 set :branch, "main"
 set :env, fetch(:env, "production")
+set :ssh_options, { forward_agent: true, user: "deploy", auth_methods: ['publickey'], keys: %w(~/.ssh/id_rsa.pub) }
 # Default deploy_to directory is /var/www/afrodrama.com/web/api
 set :deploy_to, "/var/www/afrodrama.com/web/api"
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
