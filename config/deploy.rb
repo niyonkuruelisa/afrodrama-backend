@@ -6,6 +6,7 @@ set :repo_url, "git@github.com:niyonkuruelisa/afrodrama-backend.git"
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 set :branch, "main"
+set :use_sudo, true
 set :env, fetch(:env, "production")
 set :ssh_options, { forward_agent: true, user: "deploy", auth_methods: ['publickey'], keys: %w(~/.ssh/id_rsa) }
 # Default deploy_to directory is /var/www/afrodrama.com/web/api
