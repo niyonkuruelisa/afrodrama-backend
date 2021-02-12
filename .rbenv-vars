@@ -4,6 +4,5 @@ POSTGRES_USR=afrodrama
 POSTGRES_PWD=Motivation361@123@
 RAILS_ENV=production
 RAILS_LOG_TO_STDOUT=true
-
 SMTP_USER_NAME=afrodramateam@gmail.com
 SMTP_PASSWORD=ptlpljikngyfetur
