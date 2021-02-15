@@ -34,17 +34,19 @@ gem "mini_magick"
 gem 'simple_command'
 # for allowing play videos
 gem 'mime-types', '~> 3.1'
-#for video processing
-gem 'streamio-ffmpeg'
-#for video uploading
 
+
+#for video uploading
 gem 'carrierwave', '~> 0.11.2'
+#for project deployment
 gem 'capistrano', '~> 3.11'
 gem 'capistrano-rails', '~> 1.4'
 gem 'capistrano-passenger', '~> 0.2.0'
 gem 'capistrano-rbenv', '~> 2.1', '>= 2.1.4'
+#for supporting ssh encryption
 gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
+#for .env file support
 gem 'dotenv-rails'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -52,7 +54,6 @@ group :development, :test do
 end
 
 group :development do
-
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

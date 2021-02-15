@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_25_091851) do
+ActiveRecord::Schema.define(version: 2021_02_14_082916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 2021_01_25_091851) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "discount", default: 0
     t.string "name"
+    t.boolean "softDelete", default: false
   end
 
   create_table "subscriptions", id: :string, limit: 36, force: :cascade do |t|

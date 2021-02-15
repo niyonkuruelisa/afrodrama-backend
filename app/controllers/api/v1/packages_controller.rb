@@ -6,7 +6,7 @@ class Api::V1::PackagesController < ApplicationController
   before_action :check_administration ,only: [:update,:destroy,:create]
   # GET /packages
   def index
-    @packages = Package.all
+    @packages = Package.all.order(amount: :asc)
 
     render json: {success: true,packages: @packages}
   end
@@ -36,7 +36,7 @@ class Api::V1::PackagesController < ApplicationController
 
   # DELETE /packages/1
   def destroy
-    @package.destroy
+    @package.update(:softDelete => 1)
   end
 
   private
@@ -47,6 +47,6 @@ class Api::V1::PackagesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def package_params
-      params.require(:package).permit(:id, :package_type, :name, :discount, :amount, :status)
+      params.require(:package).permit(:id, :package_type, :name, :discount, :amount, :softDelete, :status)
     end
 end
