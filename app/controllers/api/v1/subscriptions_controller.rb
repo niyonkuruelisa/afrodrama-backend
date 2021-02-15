@@ -71,7 +71,7 @@ class Api::V1::SubscriptionsController < ApplicationController
                 method: :post,
                 body: { transaction_id: @subscription.id,
                         amount: 100.0,
-                        telephoneNumber: "25078529053",
+                        telephoneNumber: "25" + subscription_params[:telephoneNumber],
                         organizationId: organization_id,
                         description: "Payment for streaming "+@package.package_type+" Package Subscription."
                 },
@@ -92,13 +92,16 @@ class Api::V1::SubscriptionsController < ApplicationController
                 render json: {subscription: @subscription,body: body}, status: :created
 
               elsif response.timed_out?
+                @subscription.destroy
                 # aw hell no
                 render json: "got a time out", status: :ok
               elsif response.code == 0
+                @subscription.destroy
                 # Could not get an http response, something's wrong.
                 render json: response.return_message, status: :ok
               else
                 # Received a non-successful http response.
+                @subscription.destroy
                 render json: "HTTP request failed: " + response.code.to_s, status: :ok
               end
             end
@@ -106,12 +109,15 @@ class Api::V1::SubscriptionsController < ApplicationController
             request2.run
 
           elsif response.timed_out?
+            @subscription.destroy
             # aw hell no
             render json: "got a time out", status: :ok
           elsif response.code == 0
+            @subscription.destroy
             # Could not get an http response, something's wrong.
             render json: response.return_message, status: :ok
           else
+            @subscription.destroy
             # Received a non-successful http response.
             render json: "HTTP request failed: " + response.code.to_s, status: :ok
           end
@@ -148,6 +154,6 @@ class Api::V1::SubscriptionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def subscription_params
-      params.require(:subscription).permit(:package_id, :user_id, :period_from, :period_to, :status)
+      params.require(:subscription).permit(:package_id, :user_id,:telephoneNumber, :period_from, :period_to, :status)
     end
 end
