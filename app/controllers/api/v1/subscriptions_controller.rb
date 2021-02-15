@@ -41,7 +41,84 @@ class Api::V1::SubscriptionsController < ApplicationController
                                        )
 
       if @subscription.save
-        render json: @subscription, status: :created
+        #getting system info
+        @package = Package.find_by_id(subscription_params[:package_id])
+        # gukora request
+        request = Typhoeus::Request.new(
+            "https://opay-api.oltranz.com/opay/login",
+            method: :post,
+            body: { applicationId: ENV["APPLICATION_ID"],
+                    username: ENV["PAYMENT_USERNAME"],
+                    password: ENV["PAYMENT_PASSWORD"],
+            },
+            headers: { Accept: "application/json" }, followlocation: true,
+            ssl_verifypeer: false,
+            ssl_verifyhost: 0)
+
+        request.on_complete do |response|
+          # getting request's response
+          if response.success?
+            # hell yeah
+            body = JSON.parse(response.body)
+            # tokens = body["body"]["tokens"]
+            # user = body["body"]["user"]
+            organization = body["body"]["organization"]
+            organization_id = organization["id"]
+
+            # creating a request for initiation payment popup
+            request2 = Typhoeus::Request.new(
+                "https://opay-api.oltranz.com/opay/paymentrequest",
+                method: :post,
+                body: { transaction_id: @subscription.id,
+                        amount: 100.0,
+                        telephoneNumber: "25078529053",
+                        organizationId: organization_id,
+                        description: "Payment for streaming "+@package.package_type+" Package Subscription."
+                },
+                headers: { Accept: "application/json" }, followlocation: true,
+                ssl_verifypeer: false,
+                ssl_verifyhost: 0)
+            request2.on_complete do |response|
+              # getting request's response
+              if response.success?
+                # hell yeah
+                body = JSON.parse(response.body)
+                #parameters to update in database
+                description = body["description"]
+                status = body["status"]
+                transactionId = body["body"]["transactionId"]
+
+                @subscription.update(statusDescription: description, transactionId: transactionId, transactionStatus: status)
+                render json: {subscription: @subscription,body: body}, status: :created
+
+              elsif response.timed_out?
+                # aw hell no
+                render json: "got a time out", status: :ok
+              elsif response.code == 0
+                # Could not get an http response, something's wrong.
+                render json: response.return_message, status: :ok
+              else
+                # Received a non-successful http response.
+                render json: "HTTP request failed: " + response.code.to_s, status: :ok
+              end
+            end
+            # sending request
+            request2.run
+
+          elsif response.timed_out?
+            # aw hell no
+            render json: "got a time out", status: :ok
+          elsif response.code == 0
+            # Could not get an http response, something's wrong.
+            render json: response.return_message, status: :ok
+          else
+            # Received a non-successful http response.
+            render json: "HTTP request failed: " + response.code.to_s, status: :ok
+          end
+        end
+        # sending request
+        request.run
+
       else
         render json: @subscription.errors, status: :unprocessable_entity
       end
@@ -63,6 +140,7 @@ class Api::V1::SubscriptionsController < ApplicationController
     @subscription.destroy
   end
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_subscription
       @subscription = Subscription.find(params[:id])

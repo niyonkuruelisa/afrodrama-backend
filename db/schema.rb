@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_14_082916) do
+ActiveRecord::Schema.define(version: 2021_02_15_210944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,14 @@ ActiveRecord::Schema.define(version: 2021_02_14_082916) do
     t.string "status", default: "active"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "statusDescription", default: ""
+    t.string "spTransactionId", default: ""
+    t.string "walletTransactionId", default: ""
+    t.string "chargedCommission", default: ""
+    t.string "currency", default: ""
+    t.integer "paidAmount", default: 0
+    t.string "transactionId", default: ""
+    t.string "transactionStatus", default: ""
     t.index ["package_id"], name: "index_subscriptions_on_package_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end

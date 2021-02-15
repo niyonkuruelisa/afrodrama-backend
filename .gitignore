@@ -32,3 +32,4 @@
 # Ignore env file
 .env
 .gitignore
+.rbenv-vars
