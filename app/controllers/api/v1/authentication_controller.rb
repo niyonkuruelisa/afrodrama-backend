@@ -8,10 +8,13 @@ class Api::V1::AuthenticationController < ApplicationController
     command = AuthenticateUser.call(params['email'],params['password'])
     if command.success?
       user = User.find_by_email(params['email'])
+      location = request.location
       render json: {
           success: true,
           token: command.result,
-          user: user.as_json(:except => (:password_digest))
+          user: user.as_json(:except => (:password_digest)),
+          location: location
+
       }
     else
       render json: {success: false, error: command.errors}, status: :ok
@@ -38,6 +41,7 @@ class Api::V1::AuthenticationController < ApplicationController
       if @user.save!
         render json: {
             success: true,
+
             message: "Account was successfully created!"
         },status: :created
         UserAccountCreatedMailer.with(user: @user,system: System.first).welcome_email.deliver_now
