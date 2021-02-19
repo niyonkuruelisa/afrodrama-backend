@@ -8,7 +8,7 @@ class Api::V1::AuthenticationController < ApplicationController
     command = AuthenticateUser.call(params['email'],params['password'])
     if command.success?
       user = User.find_by_email(params['email'])
-      location = request.remote_ip
+      location = request.remote_addr
       render json: {
           success: true,
           token: command.result,
