@@ -4,7 +4,29 @@
 # Examples:
 #
 # movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-User.create!(first_name: 'Niyonkuru',last_name: 'Elisa',email: 'niyonkuruelisa2@gmail.com',phone_number:'+250785290539',role: 'admin',password: 'Test@afrodrama.com')
-User.create!(first_name: 'Mugenimana',last_name: 'fifi',email: 'fifi@gmail.com',phone_number:'+250785290539',password: 'Test@afrodrama.com')
-User.create!(first_name: 'Test',last_name: 'Client',email: 'test@gmail.com',phone_number:'+250785290539',role: 'tester',password: 'Test@afrodrama.com')
+# default location for seeding users
+user_city      = "Kigali"
+user_region    = "Kigali"
+user_country   = "RW"
+user_timezone  = "Africa/Kigali"
+user_location  = "-1.9500,30.0588"
+# create default users
+User.create!(first_name: 'Niyonkuru',last_name: 'Elisa',email: 'niyonkuruelisa2@gmail.com',phone_number:'+250785290539',role: 'admin',password: 'Test@afrodrama.com',
+             user_city: user_city,
+             user_region: user_region,
+             user_country: user_country,
+             user_timezone: user_timezone,
+             user_location: user_location)
+User.create!(first_name: 'Mugenimana',last_name: 'fifi',email: 'fifi@gmail.com',phone_number:'+250785290539',password: 'Test@afrodrama.com',
+             user_city: user_city,
+             user_region: user_region,
+             user_country: user_country,
+             user_timezone: user_timezone,
+             user_location: user_location)
+User.create!(first_name: 'Test',last_name: 'Client',email: 'test@gmail.com',phone_number:'+250785290539',role: 'tester',password: 'Test@afrodrama.com',
+             user_city: user_city,
+             user_region: user_region,
+             user_country: user_country,
+             user_timezone: user_timezone,
+             user_location: user_location)
 System.create!(title: 'Afrodrama', company_name: 'Afrodrama LTD', about: 'Movies & Documentaries Streaming Platform', slogan: 'Design solution for any media', email: 'afrodrama@gmail.com', phone1: '+250785290539', phone2: '', keywords: 'Movie,ShortM Movies,Stream,ZacuTv', address: 'Kigali RW')
