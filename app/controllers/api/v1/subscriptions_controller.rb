@@ -13,6 +13,11 @@ class Api::V1::SubscriptionsController < ApplicationController
 
   # GET user subscription
   def subscription
+    # check and delete Subscription if user is already subscribed and active but rejected the payment popup
+    if Subscription.find_by_user_id(current_user).present? && Subscription.find_by_user_id(current_user).transactionStatus == "PENDING"
+      # delete existing subscription so that a user can subscribe again
+      Subscription.find_by_user_id(current_user).destroy
+    end
     # get user subscription
     @subscription = Subscription.where("user_id = ? AND status  = ?",@current_user.id,:active)
     if @subscription.present?
@@ -29,17 +34,23 @@ class Api::V1::SubscriptionsController < ApplicationController
 
   # POST /subscriptions
   def create
-    # check if user is already subscribed and active
+    # check if user is already subscribed and active but rejected the payment popup
+    if Subscription.find_by_user_id(subscription_params[:user_id]).present? && Subscription.find_by_user_id(subscription_params[:user_id]).transactionStatus == "PENDING"
+      # delete existing subscription so that a user can subscribe again
+      Subscription.find_by_user_id(subscription_params[:user_id]).destroy
+    end
+    # check if user is already subscribed and active and attempt to subscribe for another time.
     if Subscription.find_by_user_id(subscription_params[:user_id]).present? && Subscription.find_by_user_id(subscription_params[:user_id]).status == "active"
-      render json: {success: false,error: "You cant' subscribe more than once!"}
+      render json: {success: false,message: "You cant' subscribe more than once!"}
     else
-      @current_time = Time.now.utc + 7200
+      # create Rwandan timezone
+      @current_time = Time.now + 7200
+
       @subscription = Subscription.new(package_id: subscription_params[:package_id],
                                        user_id: subscription_params[:user_id],
                                        period_from:  @current_time,
-                                       period_to:  @current_time + 3600, # added 1hour from time we subscribed
+                                       period_to:  @current_time + 1.months, # added 1hour from time we subscribed
                                        )
-
       if @subscription.save
         #getting system info
         @package = Package.find_by_id(subscription_params[:package_id])
@@ -89,7 +100,8 @@ class Api::V1::SubscriptionsController < ApplicationController
                 transactionId = body["body"]["transactionId"]
 
                 @subscription.update(statusDescription: description, transactionId: transactionId, transactionStatus: status)
-                render json: {subscription: @subscription,body: body}, status: :created
+                # show user a custom message whenever the status is pending waiting for user to proceed with payments
+                render json: {success: true, message: @subscription.transactionStatus === "PENDING" ? "Please confirm payment by *182*7*1#" : @subscription.statusDescription }, status: :created
 
               elsif response.timed_out?
                 @subscription.destroy
@@ -98,11 +110,11 @@ class Api::V1::SubscriptionsController < ApplicationController
               elsif response.code == 0
                 @subscription.destroy
                 # Could not get an http response, something's wrong.
-                render json: response.return_message, status: :ok
+                render json: {success: false, message: response.return_message}, status: :ok
               else
                 # Received a non-successful http response.
                 @subscription.destroy
-                render json: "HTTP request failed: " + response.code.to_s, status: :ok
+                render json: {success: false, message: "HTTP request failed: " + response.code.to_s}, status: :ok
               end
             end
             # sending request
@@ -111,22 +123,22 @@ class Api::V1::SubscriptionsController < ApplicationController
           elsif response.timed_out?
             @subscription.destroy
             # aw hell no
-            render json: "got a time out", status: :ok
+            render json: {success: false, message: "got a time out"}, status: :ok
           elsif response.code == 0
             @subscription.destroy
             # Could not get an http response, something's wrong.
-            render json: response.return_message, status: :ok
+            render json: {success: false, message: response.return_message}, status: :ok
           else
             @subscription.destroy
             # Received a non-successful http response.
-            render json: "HTTP request failed: " + response.code.to_s, status: :ok
+            render json: {success: false, message: "HTTP request failed: " + response.code.to_s}, status: :ok
           end
         end
         # sending request
         request.run
 
       else
-        render json: @subscription.errors, status: :unprocessable_entity
+        render json: {success: false, message: @subscription.errors}, status: :unprocessable_entity
       end
     end
 
@@ -154,6 +166,6 @@ class Api::V1::SubscriptionsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def subscription_params
-      params.require(:subscription).permit(:package_id, :user_id,:telephoneNumber, :period_from, :period_to, :status)
+      params.require(:subscription).permit(:package_id, :user_id,:telephoneNumber, :period_from, :amount, :period_to, :status)
     end
 end
