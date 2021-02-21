@@ -43,8 +43,8 @@ class Api::V1::SubscriptionsController < ApplicationController
     if Subscription.find_by_user_id(subscription_params[:user_id]).present? && Subscription.find_by_user_id(subscription_params[:user_id]).status == "active"
       render json: {success: false,message: "You cant' subscribe more than once!"}
     else
-      # create Rwandan timezone
-      @current_time = Time.now + 7200
+      # create User timezone
+      @current_time = DateTime.now.in_time_zone(current_user.user_timezone)
 
       @subscription = Subscription.new(package_id: subscription_params[:package_id],
                                        user_id: subscription_params[:user_id],
