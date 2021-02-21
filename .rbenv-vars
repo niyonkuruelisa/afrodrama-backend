@@ -13,3 +13,5 @@ SMTP_PASSWORD=ptlpljikngyfetur
 PAYMENT_USERNAME=niyonkuruelisa@gmail.com
 PAYMENT_PASSWORD=Ellisa1@123@
 APPLICATION_ID=aac88109eabc84d4fb000000000
+APPLICATION_LOGIN_URL=https://opay-api.oltranz.com/opay/login
+APPLICATION_PAYMENT_URL=https://opay-api.oltranz.com/opay/paymentrequest

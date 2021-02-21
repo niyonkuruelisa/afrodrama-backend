@@ -56,7 +56,7 @@ class Api::V1::SubscriptionsController < ApplicationController
         @package = Package.find_by_id(subscription_params[:package_id])
         # gukora request
         request = Typhoeus::Request.new(
-            "https://opay-api.oltranz.com/opay/login",
+            ENV["APPLICATION_LOGIN_URL"],
             method: :post,
             body: { applicationId: ENV["APPLICATION_ID"],
                     username: ENV["PAYMENT_USERNAME"],
@@ -78,7 +78,7 @@ class Api::V1::SubscriptionsController < ApplicationController
 
             # creating a request for initiation payment popup
             request2 = Typhoeus::Request.new(
-                "https://opay-api.oltranz.com/opay/paymentrequest",
+                ENV["APPLICATION_PAYMENT_URL"],
                 method: :post,
                 body: { transaction_id: @subscription.id,
                         amount: 100.0,
