@@ -13,7 +13,7 @@ set :ssh_options, { forward_agent: true, user: "deploy", auth_methods: ['publick
 set :deploy_to, "/var/www/afrodrama.com/web/api"
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 # Only keep the last 5 releases to save disk space
-set :keep_releases, 3
+set :keep_releases, 1
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
