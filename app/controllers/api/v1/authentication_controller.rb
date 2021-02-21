@@ -10,7 +10,7 @@ class Api::V1::AuthenticationController < ApplicationController
       user = User.find_by_email(params['email'])
           # get user's location and ip for Timezone.
       user_ip = request.remote_ip
-      location = Geocoder.search(user_ip)[0][:data]
+      location = Geocoder.search(user_ip)[0].["data"]
       render json: {
           success: true,
           token: command.result,
