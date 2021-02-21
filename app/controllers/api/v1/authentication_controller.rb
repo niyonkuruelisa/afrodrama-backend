@@ -6,6 +6,7 @@ class Api::V1::AuthenticationController < ApplicationController
   def authenticate
 
     command = AuthenticateUser.call(params['email'],params['password'])
+
     if command.success?
       user = User.find_by_email(params['email'])
           # get user's location and ip for Timezone.
@@ -19,8 +20,7 @@ class Api::V1::AuthenticationController < ApplicationController
       render json: {
           success: true,
           token: command.result,
-          user: user.as_json(:except => (:password_digest)),
-          location: location["data"]
+          user: user.as_json(:except => (:password_digest))
       }
     else
       render json: {success: false, error: command.errors}, status: :ok
