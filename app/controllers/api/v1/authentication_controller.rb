@@ -8,18 +8,12 @@ class Api::V1::AuthenticationController < ApplicationController
     command = AuthenticateUser.call(params['email'],params['password'])
     if command.success?
       user = User.find_by_email(params['email'])
-      user_ip = request.remote_ip
-      location = Geocoder.search(user_ip)
-      user_city      = location["data"]["city"]
-      user_region    = location["data"]["region"]
-      user_country   = location["data"]["country"]
-      user_timezone  = location["data"]["timezone"]
-      user_location  = location["data"]["loc"]
+
       render json: {
           success: true,
           token: command.result,
           user: user.as_json(:except => (:password_digest)),
-          location: location["city"]
+          location: location
 
       }
     else
@@ -35,11 +29,11 @@ class Api::V1::AuthenticationController < ApplicationController
     # get user's location and ip for Timezone.
     user_ip = request.remote_ip
     location = Geocoder.search(user_ip)
-    user_city      = location["data"]["city"]
-    user_region    = location["data"]["region"]
-    user_country   = location["data"]["country"]
-    user_timezone  = location["data"]["timezone"]
-    user_location  = location["data"]["loc"]
+    user_city      = location["data"]["city"].to_s
+    user_region    = location["data"]["region"].to_s
+    user_country   = location["data"]["country"].to_s
+    user_timezone  = location["data"]["timezone"].to_s
+    user_location  = location["data"]["loc"].to_s
     @user  = User.new(first_name: params['firstName'],
                       last_name: params['lastName'],
                       email: params['email'],
