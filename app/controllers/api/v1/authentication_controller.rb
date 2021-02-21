@@ -11,11 +11,11 @@ class Api::V1::AuthenticationController < ApplicationController
           # get user's location and ip for Timezone.
       user_ip = request.remote_ip
       location = Geocoder.search(user_ip)[0]
-      user_city      = location["data"]["city"].to_s
-      user_region    = location["data"]["region"].to_s
-      user_country   = location["data"]["country"].to_s
-      user_timezone  = location["data"]["timezone"].to_s
-      user_location  = location["data"]["loc"].to_s
+      # user_city      = location["data"]["city"].to_s
+      # user_region    = location["data"]["region"].to_s
+      # user_country   = location["data"]["country"].to_s
+      # user_timezone  = location["data"]["timezone"].to_s
+      # user_location  = location["data"]["loc"].to_s
       render json: {
           success: true,
           token: command.result,
@@ -34,12 +34,12 @@ class Api::V1::AuthenticationController < ApplicationController
   def registration
     # get user's location and ip for Timezone.
     user_ip = request.remote_ip
-    location = Geocoder.search(user_ip)
-    user_city      = location[0]["data"]["city"].to_s
-    user_region    = location[0]["data"]["region"].to_s
-    user_country   = location[0]["data"]["country"].to_s
-    user_timezone  = location[0]["data"]["timezone"].to_s
-    user_location  = location[0]["data"]["loc"].to_s
+    location = Geocoder.search(user_ip)[0]
+    user_city      = location["data"]["city"].to_s
+    user_region    = location["data"]["region"].to_s
+    user_country   = location["data"]["country"].to_s
+    user_timezone  = location["data"]["timezone"].to_s
+    user_location  = location["data"]["loc"].to_s
     @user  = User.new(first_name: params['firstName'],
                       last_name: params['lastName'],
                       email: params['email'],
