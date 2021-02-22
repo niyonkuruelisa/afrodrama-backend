@@ -352,7 +352,7 @@ class Api::V1::MoviesController < ApplicationController
     # adding cover url on fly
     @movie.movie_covers.each do |c|
       begin
-        c.url = url_for(request.base_url + c.cover.url)
+        c.url = request.base_url + c.movie.url
         c.url = c.url.sub! 'http:', 'https:' if Rails.env.production?
         c.url = c.url.sub! ':3000', '' if Rails.env.production?
       rescue
