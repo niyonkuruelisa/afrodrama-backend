@@ -327,7 +327,7 @@ class Api::V1::MoviesController < ApplicationController
             c.url = c.url.sub! 'http:', 'https:' if Rails.env.production?
             c.url = c.url.sub! ':3000', '' if Rails.env.production?
           rescue
-            c.url = ""
+            c.url = request.base_url + c.cover.url
           end
         end
       end
