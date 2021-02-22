@@ -362,7 +362,6 @@ class Api::V1::MoviesController < ApplicationController
     # adding movie stream url on fly
     @movie.movie_files.each do |c|
 
-
       begin
         c.streamURL = request.base_url + c.movie.url
         c.streamURL = c.streamURL.sub! 'http:', 'https:' if Rails.env.production?
@@ -371,9 +370,6 @@ class Api::V1::MoviesController < ApplicationController
         c.streamURL = request.base_url + c.movie.url
       end
     end
-    # @movie.movie_files.each do |c|
-    #   c.file.purge
-    # end
     @movie = @movie.as_json(
         :include =>
             [
