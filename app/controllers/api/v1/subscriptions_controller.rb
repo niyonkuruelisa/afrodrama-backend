@@ -1,7 +1,7 @@
 class Api::V1::SubscriptionsController < ApplicationController
   before_action :set_subscription, only: [:show, :update, :destroy]
   # Allow only Authorized users
-  before_action :authenticate_request
+  before_action :authenticate_request, except: [:index]
   # Allow only Admin to update,Destroy Subscription
   before_action :check_administration ,only: [:update,:destroy]
   # GET /subscriptions
@@ -13,11 +13,6 @@ class Api::V1::SubscriptionsController < ApplicationController
 
   # GET user subscription
   def subscription
-    # check and delete Subscription if user is already subscribed and active but rejected the payment popup
-    if Subscription.find_by_user_id(current_user).present? && Subscription.find_by_user_id(current_user).transactionStatus == "PENDING"
-      # delete existing subscription so that a user can subscribe again
-      Subscription.find_by_user_id(current_user).destroy
-    end
     # get user subscription
     @subscription = Subscription.where("user_id = ? AND status  = ?",@current_user.id,:active)
     if @subscription.present?
@@ -34,16 +29,11 @@ class Api::V1::SubscriptionsController < ApplicationController
 
   # POST /subscriptions
   def create
-    # check if user is already subscribed and active but rejected the payment popup
-    if Subscription.find_by_user_id(subscription_params[:user_id]).present? && Subscription.find_by_user_id(subscription_params[:user_id]).transactionStatus == "PENDING"
-      # delete existing subscription so that a user can subscribe again
-      Subscription.find_by_user_id(subscription_params[:user_id]).destroy
-    end
     # check if user is already subscribed and active and attempt to subscribe for another time.
-    if Subscription.find_by_user_id(subscription_params[:user_id]).present? && Subscription.find_by_user_id(subscription_params[:user_id]).status == "active"
+    if Subscription.find_by_user_id(subscription_params[:user_id]).present? && Subscription.find_by_user_id(subscription_params[:user_id]).status == "active" && Subscription.find_by_user_id(subscription_params[:user_id]).transactionStatus == "SUCCESS"
       render json: {success: false,message: "You cant' subscribe more than once!"}
     else
-      # create User timezone
+      # create User's timezone
       @current_time = DateTime.now.in_time_zone(current_user.user_timezone)
 
       @subscription = Subscription.new(package_id: subscription_params[:package_id],
@@ -84,6 +74,7 @@ class Api::V1::SubscriptionsController < ApplicationController
                         amount: 100.0,
                         telephoneNumber: "25" + subscription_params[:telephoneNumber],
                         organizationId: organization_id,
+                        callbackUrl: "https://afrodrama.com/api/v1/callback",
                         description: "Payment for streaming "+@package.package_type+" Package Subscription."
                 },
                 headers: { Accept: "application/json" }, followlocation: true,
@@ -101,7 +92,7 @@ class Api::V1::SubscriptionsController < ApplicationController
 
                 @subscription.update(statusDescription: description, transactionId: transactionId, transactionStatus: status)
                 # show user a custom message whenever the status is pending waiting for user to proceed with payments
-                render json: {success: true, message: @subscription.transactionStatus === "PENDING" ? "Please confirm payment by *182*7*1#" : @subscription.statusDescription }, status: :created
+                render json: {success: true, message: @subscription.transactionStatus === "PENDING" ? "Type *182*7*1# to complete payment" : @subscription.statusDescription }, status: :created
 
               elsif response.timed_out?
                 @subscription.destroy

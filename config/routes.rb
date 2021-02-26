@@ -35,6 +35,8 @@ Rails.application.routes.draw do
       # system payments
       resources :packages
       resources :subscriptions
+
+      post 'callback', to: 'payment#callback'
     end
   end
 end
