@@ -71,7 +71,7 @@ class Api::V1::SubscriptionsController < ApplicationController
                 ENV["APPLICATION_PAYMENT_URL"],
                 method: :post,
                 body: { transaction_id: @subscription.id,
-                        amount: @package.amount,
+                        amount: 100.0,
                         telephoneNumber: "25" + subscription_params[:telephoneNumber],
                         organizationId: organization_id,
                         callbackUrl: "https://afrodrama.com/api/v1/callback",
