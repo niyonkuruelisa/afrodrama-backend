@@ -14,7 +14,7 @@ class Api::V1::SubscriptionsController < ApplicationController
   # GET user subscription
   def subscription
     # get user subscription
-    @subscription = Subscription.where("user_id = ? AND status  = ?",@current_user.id,:active)
+    @subscription = Subscription.where("user_id = ? AND transactionStatus  = ?",@current_user.id,:SUCCESS)
     if @subscription.present?
       render json: {success: true, subscription: @subscription}
     else
