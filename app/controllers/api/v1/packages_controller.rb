@@ -25,7 +25,7 @@ class Api::V1::PackagesController < ApplicationController
     end
 
   end
-  # PATCH/PUT /packages/1
+  # PATCH/PUT /packages/:id
   def update
     if @package.update(package_params)
       render json: {success: true,package: @package}

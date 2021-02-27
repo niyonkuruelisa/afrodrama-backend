@@ -16,6 +16,8 @@ Rails.application.routes.draw do
       get 'checkAuth',  to: 'authentication#checkAuth'
       get 'user',  to: 'user#show'
 
+      put 'user',  to: 'user#update'
+      patch 'user/',  to: 'user#update'
       # Admin Routes
       # dashboard
       get 'admin/dashboard', to: 'admin/dashboard#dashboard'
